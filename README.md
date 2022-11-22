@@ -7,7 +7,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/org.myhab.tools/graphql-java-linter)]()  
 [![Nexus snapshot](https://img.shields.io/nexus/s/org.myhab.tools/graphql-java-linter?server=https%3A%2F%2Fs01.oss.sonatype.org%2F)](https://s01.oss.sonatype.org/content/repositories/snapshots/org/myhab/tools/graphql-java-linter/)
 
-### Usage command line
+### Usage
 
 1. Create yaml configuration file E.g: `linter.yaml`
 
@@ -38,21 +38,22 @@ rules:
     failWhenExceed: 10
 ```
 
-2. Run from command line E.g:
+### Command line
+#### Run from command line:
 
 ```bash
-java -jar graphql-java-linter-1.0.jar linter.yaml
+java -jar graphql-java-linter-1.1.jar linter.yaml
 ```
 
 ### In CI/CD flow via unit tests
 
-1. Add dependency
+#### Add dependency
 
 `build.gradle`
 
 ```groovy
 dependencies {
-    test 'org.myhab.tools:graphql-java-linter:1.0'
+    test 'org.myhab.tools:graphql-java-linter:1.1'
 }
 ```
 
@@ -63,12 +64,12 @@ dependencies {
 <dependency>
     <groupId>org.myhab.tools</groupId>
     <artifactId>graphql-java-linter</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <scope>test</scope>
 </dependency>
 ```
 
-junit
+#### junit
 
 ```java
 import graphql.linter.LintRunner;
