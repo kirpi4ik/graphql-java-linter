@@ -47,9 +47,6 @@ artifacts {
 }
 publishing {
     publications {
-        gpr(MavenPublication) {
-            from(components.java)
-        }
         mavenJava(MavenPublication) {
             groupId = project.group
             artifactId = rootProject.name
@@ -78,6 +75,9 @@ publishing {
                     }
                 }
             }
+        }
+        gpr(MavenPublication) {
+            from(components.java)
         }
     }
     repositories {
