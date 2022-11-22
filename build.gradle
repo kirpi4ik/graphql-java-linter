@@ -45,6 +45,7 @@ publishing {
             pom {
                 name = project.name
                 description = 'GraphQL schema linting tool'
+                url = 'https://github.com/kirpi4ik/graphql-java-linter'
                 licenses {
                     license {
                         name = 'The Apache License, Version 2.0'
