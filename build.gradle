@@ -43,6 +43,8 @@ publishing {
 
             from project.components.java
             pom {
+                name = project.name
+                description = 'GraphQL schema linting tool'
                 licenses {
                     license {
                         name = 'The Apache License, Version 2.0'
