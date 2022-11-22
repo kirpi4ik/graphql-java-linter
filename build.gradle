@@ -8,14 +8,14 @@ plugins {
 group 'org.myhab.tools'
 version '1.1-SNAPSHOT'
 
-jar {
+task cliJar(type: Jar) {
     manifest {
-        attributes "Main-Class": 'graphql.linter.CLIRunner'
+        attributes 'Main-Class': 'graphql.linter.CLIRunner'
     }
-
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    }
+    archiveBaseName = "${project.name}-cli"
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
 
 repositories {
@@ -43,7 +43,7 @@ javadoc {
 }
 
 artifacts {
-    archives javadocJar, sourcesJar
+    archives javadocJar, sourcesJar, cliJar
 }
 publishing {
     publications {
@@ -53,6 +53,10 @@ publishing {
             version = project.version
 
             from project.components.java
+            artifact cliJar{
+                classifier "cli"
+            }
+
             pom {
                 name = project.name
                 description = 'GraphQL schema linting tool'
