@@ -1,0 +1,18 @@
+level: WARN
+failWhenExceedWarningMax: true
+
+schema:
+  local:
+    uri: src/test/resources/schema/
+    extensions:
+      - "graphql"
+      - "graphqls"
+rules:
+  field_name_first_lowercase:
+    level: WARN
+    disable: false
+    failWhenExceed: 2
+  defined_types_are_used:
+    level: WARN
+    disable: false
+    failWhenExceed: 10

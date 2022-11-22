@@ -2,10 +2,21 @@ plugins {
     id 'groovy'
     id 'maven-publish'
     id 'signing'
+    id 'java'
 }
 
 group 'org.myhab.tools'
-version '1.0'
+version '1.1-SNAPSHOT'
+
+jar {
+    manifest {
+        attributes "Main-Class": 'graphql.linter.CLIRunner'
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
 
 repositories {
     mavenCentral()

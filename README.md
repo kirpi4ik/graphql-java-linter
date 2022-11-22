@@ -5,7 +5,7 @@
 [![Version](https://badge.fury.io/gh/kirpi4ik%2Fgraphql-java-linter.svg)](https://badge.fury.io/gh/kirpi4ik%2Fgraphql-java-linter)
 [![GitHub Release](https://img.shields.io/github/v/release/kirpi4ik/graphql-java-linter?include_prereleases)]()  
 [![Maven Central](https://img.shields.io/maven-central/v/org.myhab.tools/graphql-java-linter)]()  
-[![Nexus snapshot](https://img.shields.io/nexus/s/org.myhab.tools/graphql-java-linter?server=https%3A%2F%2Fs01.oss.sonatype.org%2F)]()
+[![Nexus snapshot](https://img.shields.io/nexus/s/org.myhab.tools/graphql-java-linter?server=https%3A%2F%2Fs01.oss.sonatype.org%2F)](https://s01.oss.sonatype.org/content/repositories/snapshots/org/myhab/tools/graphql-java-linter/)
 
 ### Usage command line
 
