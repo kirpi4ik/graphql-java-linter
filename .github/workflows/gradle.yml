@@ -35,6 +35,11 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
       - name: Execute Gradle build
+        env:
+          MVN_CENTRAL_USERNAME: ${{ secrets.MVN_CENTRAL_USERNAME }}
+          MVN_CENTRAL_PASSWD: ${{ secrets.MVN_CENTRAL_PASSWD }}
+          GTH_USERNAME: ${{ secrets.GTH_USERNAME }}
+          GTH_TOKEN: ${{ secrets.GTH_TOKEN }}
         run: ./gradlew clean build :publishGprPublicationToGitHubPackagesRepository
 
       - name: Upload artifacts
