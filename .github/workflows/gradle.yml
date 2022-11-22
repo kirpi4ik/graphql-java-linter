@@ -28,7 +28,7 @@ jobs:
           gradle-version: 7.3.3
 
       - name: Execute Gradle build
-          run: ./gradlew build
+        run: ./gradlew build
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
