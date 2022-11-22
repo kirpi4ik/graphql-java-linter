@@ -86,16 +86,16 @@ publishing {
             def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
             url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
             credentials {
-                username = mavenCentralUsername ?: System.env.MVN_CENTRAL_USERNAME
-                password = mavenCentralPassword ?: System.env.MVN_CENTRAL_PASSWD
+                username = System.env.MVN_CENTRAL_USERNAME ?: mavenCentralUsername
+                password = System.env.MVN_CENTRAL_PASSWD ?: mavenCentralPassword
             }
         }
         maven {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/kirpi4ik/graphql-java-linter")
             credentials {
-                username = gthUsername ?: System.getenv("GTH_USERNAME")
-                password = gthPassword ?: System.getenv("GTH_TOKEN")
+                username = System.env.GTH_USERNAME ?: gthUsername
+                password = System.env.GTH_TOKEN ?: gthPassword
             }
         }
     }
