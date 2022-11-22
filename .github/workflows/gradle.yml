@@ -35,7 +35,7 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
       - name: Execute Gradle build
-        run: ./gradlew clean build -x sign
+        run: ./gradlew clean build :publishGprPublicationToGitHubPackagesRepository
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3

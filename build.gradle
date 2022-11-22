@@ -47,6 +47,9 @@ artifacts {
 }
 publishing {
     publications {
+        gpr(MavenPublication) {
+            from(components.java)
+        }
         mavenJava(MavenPublication) {
             groupId = project.group
             artifactId = rootProject.name
@@ -85,6 +88,14 @@ publishing {
             credentials {
                 username = !System.env.MVN_CENTRAL_USERNAME?:mavenCentralUsername
                 password = !System.env.MVN_CENTRAL_PASSWD?:mavenCentralPassword
+            }
+        }
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/kirpi4ik/graphql-java-linter")
+            credentials {
+                username = System.getenv("GTH_USERNAME")?:gthUsername
+                password = System.getenv("GTH_TOKEN")?:gthPassword
             }
         }
     }
