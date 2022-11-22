@@ -1,0 +1,40 @@
+type Query{
+    is : String
+    someType: SomeUsedType
+}
+
+type SomeUsedType {
+    aField:String
+}
+type UnusedTypeOne{
+    someField: String
+    anotherUsedType: UsedTypeTwo
+}
+type UnusedTypeTwo{
+    someField: String
+    anotherUsedType: UsedTypeTwo
+}
+type UsedTypeTwo {
+    field:String
+}
+
+type Mutation{
+    dummy(input: DummyInput, sclr:String) : String
+}
+
+input DummyInput {
+    ddd: String
+    ccc: SomeEnum
+}
+
+input UnusedInputOne{
+    in:String
+}
+enum UnusedEnum{
+    XC
+}
+enum SomeEnum {
+    BBAA
+    ABBA
+}
+
