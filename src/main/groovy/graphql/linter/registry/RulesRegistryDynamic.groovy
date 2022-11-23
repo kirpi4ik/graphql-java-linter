@@ -1,9 +1,8 @@
-package graphql.linter.rules.registry
+package graphql.linter.registry
 
 import graphql.linter.LinterConfiguration
+import graphql.linter.registry.types.RuleType
 import graphql.linter.rules.LintRule
-import graphql.linter.rules.RuleDSL
-import graphql.linter.rules.RuleType
 import org.codehaus.groovy.control.CompilerConfiguration
 import org.codehaus.groovy.control.customizers.ImportCustomizer
 
@@ -25,11 +24,12 @@ class RulesRegistryDynamic implements Registry {
         compilerConfiguration.setScriptBaseClass(DelegatingScript.class.getName());
 
         def ic = new ImportCustomizer();
-        ic.addImports(ServiceUtils.class.getName());
+        ic.addImports(RuleUtils.class.getName());
+        ic.addStarImports("graphql.schema")
         compilerConfiguration.addCompilationCustomizers(ic);
 
         Binding binding = new Binding();
-        binding.setVariable("context", new RuleContext());
+        binding.setVariable("ruleUtils", new RuleUtils());
         for (def prop : properties.entrySet()) {
             binding.setVariable(prop.getKey() as String, prop.getValue());
         }
@@ -38,11 +38,12 @@ class RulesRegistryDynamic implements Registry {
         try (Stream<Path> paths = Files.walk(Paths.get(config.registry['dsl']['uri']))) {
             paths.filter(Files::isRegularFile).map(p -> new MapEntry((p.getFileName()), Files.readString(p))).each { scriptFile ->
                 DelegatingScript ruleScript = (DelegatingScript) gs.parse(scriptFile.value as String)
-                ruleScript.setDelegate(new RuleDSL(name: (scriptFile.key as String).replaceAll("(?<!^)[.][^.]*\$","")));
+                ruleScript.setDelegate(new RuleDSL(name: (scriptFile.key as String).replaceAll("(?<!^)[.][^.]*\$", "")));
                 ruleScript.run();
                 if (ruleScript.delegate.types.contains(RuleType.FIELD)) {
                     fieldRules << (ruleScript.delegate as LintRule)
-                } else if (ruleScript.delegate.contains(RuleType.TYPE)) {
+                }
+                if (ruleScript.delegate.types.contains(RuleType.TYPE)) {
                     typeRules << (ruleScript.delegate as LintRule)
                 }
             }

@@ -1,10 +1,8 @@
-package graphql.linter.rules.registry
+package graphql.linter.registry
 
-import graphql.linter.rules.DefinedTypesAreUsed
-import graphql.linter.rules.FieldNameFirstLowercase
-import graphql.linter.rules.LintRule
-import graphql.linter.rules.types.FieldRule
-import graphql.linter.rules.types.TypeRule
+import graphql.linter.registry.types.FieldRule
+import graphql.linter.registry.types.TypeRule
+import graphql.linter.rules.*
 
 class RulesRegistryStatic implements Registry {
     private Set<LintRule> fieldRules = new HashSet<>()
@@ -13,6 +11,9 @@ class RulesRegistryStatic implements Registry {
     RulesRegistryStatic() {
         register(FieldNameFirstLowercase.class)
         register(DefinedTypesAreUsed.class)
+        register(ArgumentsHasDescriptions.class)
+        register(DeprecationHasReason.class)
+        register(EnumValueAllCaps.class)
     }
 
     def register(Class<?> rule) {

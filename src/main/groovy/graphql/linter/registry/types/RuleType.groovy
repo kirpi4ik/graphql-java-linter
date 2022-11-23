@@ -1,4 +1,4 @@
-package graphql.linter.rules
+package graphql.linter.registry.types
 
 enum RuleType {
     FIELD,

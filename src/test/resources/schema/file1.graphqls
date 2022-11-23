@@ -1,10 +1,19 @@
+directive @customDirective(
+    context: [String!]
+) on FIELD_DEFINITION | OBJECT | INTERFACE
+
 type Query{
     is : String
     someType: SomeUsedType
 }
 
 type SomeUsedType {
-    aField:String
+    aField:String @customDirective
+}
+type DeprecatedType{
+    id: String!
+    derepcatedField(deprecatedArgument:String @deprecated):String @deprecated
+    derepcatedField2(deprecatedArgument2:String @deprecated(reason: "deprecated")):String @deprecated(reason: "deprecated")
 }
 type UnusedTypeOne{
     someField: String
@@ -38,3 +47,8 @@ enum SomeEnum {
     ABBA
 }
 
+enum EnumWithLowerCase {
+    BBaa
+    aBB
+    aaa
+}

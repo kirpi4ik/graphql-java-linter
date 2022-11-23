@@ -1,4 +1,4 @@
-package graphql.linter.rules.registry
+package graphql.linter.registry
 
 import graphql.linter.rules.LintRule
 

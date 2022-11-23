@@ -1,6 +1,6 @@
 package graphql.linter
 
-import graphql.linter.rules.registry.RulesRegistry
+import graphql.linter.registry.RulesRegistry
 import graphql.schema.*
 import groovy.time.TimeCategory
 

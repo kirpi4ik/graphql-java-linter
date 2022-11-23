@@ -1,6 +1,7 @@
 package graphql.linter.rules
 
-import graphql.linter.rules.types.TypeRule
+
+import graphql.linter.registry.types.TypeRule
 import graphql.schema.GraphQLInputObjectType
 import graphql.schema.GraphQLNamedSchemaElement
 import graphql.schema.GraphQLObjectType

@@ -1,6 +1,7 @@
 package graphql.linter.rules
 
-import graphql.linter.rules.types.FieldRule
+
+import graphql.linter.registry.types.FieldRule
 import graphql.schema.GraphQLNamedSchemaElement
 
 @FieldRule

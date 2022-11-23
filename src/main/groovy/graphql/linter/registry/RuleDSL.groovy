@@ -1,5 +1,7 @@
-package graphql.linter.rules
+package graphql.linter.registry
 
+import graphql.linter.registry.types.RuleType
+import graphql.linter.rules.LintRule
 import graphql.schema.GraphQLNamedSchemaElement
 
 class RuleDSL extends LintRule {

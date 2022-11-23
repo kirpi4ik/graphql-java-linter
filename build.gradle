@@ -52,7 +52,7 @@ publishing {
             version = project.version
 
             from project.components.java
-            artifact cliJar{
+            artifact cliJar {
                 classifier "cli"
             }
 
@@ -80,7 +80,10 @@ publishing {
             }
         }
         gpr(MavenPublication) {
-            from(components.java)
+            artifactId = rootProject.name + "-cli"
+            artifact cliJar {
+                classifier "cli"
+            }
         }
     }
     repositories {
@@ -106,6 +109,7 @@ publishing {
 signing {
     useGpgCmd()
     sign publishing.publications.mavenJava
+    sign publishing.publications.gpr
 }
 test {
     useJUnitPlatform()
