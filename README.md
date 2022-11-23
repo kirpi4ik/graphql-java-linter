@@ -15,6 +15,9 @@
 # GraphQL Linter Configuration
 level: WARN
 failWhenExceedWarningMax: true
+registry:
+  dsl:
+    uri: src/test/resources/rules/
 schema:
   # local schema folder
   local:
@@ -39,10 +42,11 @@ rules:
 ```
 
 ### Command line
+
 #### Run from command line:
 
 ```bash
-java -jar graphql-java-linter-1.1.jar linter.yaml
+java -jar graphql-java-linter-1.1-cli.jar linter.yaml
 ```
 
 ### In CI/CD flow via unit tests
@@ -84,4 +88,33 @@ public class GraphQLLinterTest {
         runner.run();
     }
 }
+```
+
+### DSL support
+
+Besides
+linter's [rules](https://github.com/kirpi4ik/graphql-java-linter/tree/master/src/main/groovy/graphql/linter/rules) which
+are embedded, you can define own set of rules using custom groovy DSL
+
+`arguments_has_descriptions`
+
+```groovy
+rule(["FIELD"]) {
+    node.children.each { schemaElement ->
+        if (schemaElement instanceof GraphQLArgument) {
+            if (schemaElement.description == null) {
+                fail(parent, node, "Argument `${parent.name}.${node.name}(${schemaElement.name})` missing description.")
+            }
+        }
+
+    }
+}
+```
+
+In configuration file you will have to specify folder location which contains the dsl rules
+
+```yaml
+registry:
+  dsl:
+    uri: src/test/resources/rules/
 ```

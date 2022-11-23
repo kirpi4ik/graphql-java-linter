@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'org.myhab.tools'
-version '1.1-SNAPSHOT'
+version '1.1'
 
 task cliJar(type: Jar) {
     manifest {
