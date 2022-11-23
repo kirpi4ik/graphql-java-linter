@@ -11,15 +11,15 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.stream.Stream
 
-class Executor {
+class CLIRunner {
     static void main(String[] args) {
         assert args.size() > 0
-        def yamlConfig = new YamlConfiguration(args.size() > 1 ? args[1] : null).config
+        def yamlConfig = new YamlConfiguration(args[0]).config
 
         SchemaParser schemaParser = new SchemaParser();
         SchemaGenerator schemaGenerator = new SchemaGenerator();
         TypeDefinitionRegistry tdr = new TypeDefinitionRegistry();
-        try (Stream<Path> paths = Files.walk((Paths.get(args[0])))) {
+        try (Stream<Path> paths = Files.walk(Paths.get(yamlConfig.schema['local']['uri']))) {
             paths.filter(Files::isRegularFile).map(Files::readString).each {
                 tdr.merge(schemaParser.parse(it))
             }

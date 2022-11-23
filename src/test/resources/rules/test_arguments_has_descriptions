@@ -1,0 +1,10 @@
+rule(["FIELD"]) {
+        node.children.each { schemaElement ->
+            if (schemaElement instanceof GraphQLArgument) {
+                if (schemaElement.description == null) {
+                    fail(parent, node, "Argument `${parent.name}.${node.name}(${schemaElement.name})` missing description.")
+                }
+            }
+
+        }
+}

@@ -5,9 +5,9 @@
 [![Version](https://badge.fury.io/gh/kirpi4ik%2Fgraphql-java-linter.svg)](https://badge.fury.io/gh/kirpi4ik%2Fgraphql-java-linter)
 [![GitHub Release](https://img.shields.io/github/v/release/kirpi4ik/graphql-java-linter?include_prereleases)]()  
 [![Maven Central](https://img.shields.io/maven-central/v/org.myhab.tools/graphql-java-linter)]()  
-[![Nexus snapshot](https://img.shields.io/nexus/s/org.myhab.tools/graphql-java-linter?server=https%3A%2F%2Fs01.oss.sonatype.org%2F)]()
+[![Nexus snapshot](https://img.shields.io/nexus/s/org.myhab.tools/graphql-java-linter?server=https%3A%2F%2Fs01.oss.sonatype.org%2F)](https://s01.oss.sonatype.org/content/repositories/snapshots/org/myhab/tools/graphql-java-linter/)
 
-### Usage command line
+### Usage
 
 1. Create yaml configuration file E.g: `linter.yaml`
 
@@ -15,6 +15,9 @@
 # GraphQL Linter Configuration
 level: WARN
 failWhenExceedWarningMax: true
+registry:
+  dsl:
+    uri: src/test/resources/rules/
 schema:
   # local schema folder
   local:
@@ -38,21 +41,23 @@ rules:
     failWhenExceed: 10
 ```
 
-2. Run from command line E.g:
+### Command line
+
+#### Run from command line:
 
 ```bash
-java -jar graphql-java-linter-1.0.jar linter.yaml
+java -jar graphql-java-linter-1.1-cli.jar linter.yaml
 ```
 
 ### In CI/CD flow via unit tests
 
-1. Add dependency
+#### Add dependency
 
 `build.gradle`
 
 ```groovy
 dependencies {
-    test 'org.myhab.tools:graphql-java-linter:1.0'
+    test 'org.myhab.tools:graphql-java-linter:1.1'
 }
 ```
 
@@ -63,12 +68,12 @@ dependencies {
 <dependency>
     <groupId>org.myhab.tools</groupId>
     <artifactId>graphql-java-linter</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <scope>test</scope>
 </dependency>
 ```
 
-junit
+#### junit
 
 ```java
 import graphql.linter.LintRunner;
@@ -83,4 +88,33 @@ public class GraphQLLinterTest {
         runner.run();
     }
 }
+```
+
+### DSL support
+
+Besides
+linter's [rules](https://github.com/kirpi4ik/graphql-java-linter/tree/master/src/main/groovy/graphql/linter/rules) which
+are embedded, you can define own set of rules using custom groovy DSL
+
+`arguments_has_descriptions`
+
+```groovy
+rule(["FIELD"]) {
+    node.children.each { schemaElement ->
+        if (schemaElement instanceof GraphQLArgument) {
+            if (schemaElement.description == null) {
+                fail(parent, node, "Argument `${parent.name}.${node.name}(${schemaElement.name})` missing description.")
+            }
+        }
+
+    }
+}
+```
+
+In configuration file you will have to specify folder location which contains the dsl rules
+
+```yaml
+registry:
+  dsl:
+    uri: src/test/resources/rules/
 ```

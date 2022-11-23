@@ -5,4 +5,6 @@ class LinterConfiguration {
     boolean failWhenExceedWarningMax = false
     def schema
     def rules = [String: [:]]
+    private registry = [:]
+
 }
