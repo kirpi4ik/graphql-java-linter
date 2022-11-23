@@ -8,9 +8,10 @@ import graphql.schema.GraphQLNamedSchemaElement
 abstract class LintRule {
     protected ExecutionContext context
     protected ExecutionEnvironment executionEnvironment
+    protected name
 
     LintRule() {
-
+        name = this.getClass().getSimpleName().replaceAll(/([A-Z]+)([A-Z][a-z])/, "\$1_\$2").replaceAll(/([a-z])([A-Z])/, "\$1_\$2").toLowerCase()
     }
 
     LintRule(ExecutionContext context) {
@@ -20,7 +21,7 @@ abstract class LintRule {
     def abstract validate(GraphQLNamedSchemaElement parent, GraphQLNamedSchemaElement node)
 
     String name() {
-        return this.getClass().getSimpleName().replaceAll(/([A-Z]+)([A-Z][a-z])/, "\$1_\$2").replaceAll(/([a-z])([A-Z])/, "\$1_\$2").toLowerCase()
+        return name
     }
 
     void setContext(ExecutionContext context) {

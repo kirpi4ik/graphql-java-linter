@@ -8,8 +8,6 @@ import java.nio.file.Paths
 class YamlConfiguration {
     private static def yaml = new Yaml();
     private LinterConfiguration config
-    private schema = [:]
-
 
     YamlConfiguration(yamlURI) {
         if (yamlURI) {

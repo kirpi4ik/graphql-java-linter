@@ -19,7 +19,7 @@ class CLIRunner {
         SchemaParser schemaParser = new SchemaParser();
         SchemaGenerator schemaGenerator = new SchemaGenerator();
         TypeDefinitionRegistry tdr = new TypeDefinitionRegistry();
-        try (Stream<Path> paths = Files.walk((Paths.get(yamlConfig.schema['local']['uri'])))) {
+        try (Stream<Path> paths = Files.walk(Paths.get(yamlConfig.schema['local']['uri']))) {
             paths.filter(Files::isRegularFile).map(Files::readString).each {
                 tdr.merge(schemaParser.parse(it))
             }

@@ -20,7 +20,7 @@ class BasicResultHandler implements ResultHandler{
                 printf "# [ %-30s ] [ %-3d failures][%-6d runs] [%-4.3f sec/rule]                                    #%n", ruleName, ruleWarn.size(), context.execution[ruleName]['count'], context.execution[ruleName]['time']
                 ruleWarn.each { error -> printf("#            +  %-100s  #%n", error.message)
                 }
-                def failWhenExceed = executionEnvironment.config['rules'][ruleName]['failWhenExceed']
+                def failWhenExceed = executionEnvironment.config['rules'][ruleName as String]?['failWhenExceed']
                 if (executionEnvironment.config['failWhenExceedWarningMax'] && (failWhenExceed && ruleWarn.size() > failWhenExceed)) {
                     throw new RuleValidationError("[${ruleName}] Exceeded number of failures. ${ruleWarn.size()} > ${failWhenExceed} ")
                 }

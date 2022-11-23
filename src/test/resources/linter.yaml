@@ -1,6 +1,8 @@
 level: WARN
 failWhenExceedWarningMax: true
-
+registry:
+  dsl:
+    uri: src/test/resources/rules/
 schema:
   local:
     uri: src/test/resources/schema/

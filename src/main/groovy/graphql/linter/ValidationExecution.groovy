@@ -1,19 +1,16 @@
 package graphql.linter
 
-import graphql.linter.exception.RuleValidationError
+import graphql.linter.rules.registry.RulesRegistry
 import graphql.schema.*
 import groovy.time.TimeCategory
 
 class ValidationExecution {
     RulesRegistry rulesRegistry
 
-    ValidationExecution() {
-        this.rulesRegistry = loadRegistry()
-    }
-
     ExecutionContext validate(ExecutionEnvironment executionEnvironment, ResultHandler resultHandler) {
         assert executionEnvironment.config != null
         assert executionEnvironment.schema != null
+        rulesRegistry = new RulesRegistry(executionEnvironment.config)
         ExecutionContext context = new ExecutionContext()
         executionEnvironment.schema.typeMap.entrySet().each {
             if (!it.key.startsWith("_")) {
@@ -31,13 +28,8 @@ class ValidationExecution {
         return context
     }
 
-    static def handleResult(executionEnvironment, context) {
-
-    }
-
     def validateType(ExecutionEnvironment executionEnvironment, ExecutionContext context, GraphQLNamedType graphQLNamedType) {
-        rulesRegistry.getTypeRuleSet().each {
-            def rule = it.getDeclaredConstructor().newInstance()
+        rulesRegistry.getTypeRuleSet().each { rule ->
             rule.setContext(context)
             rule.setExecutionEnvironment(executionEnvironment)
             if (!executionEnvironment.config['rules'][rule.name()] ?['disable']) {
@@ -52,9 +44,8 @@ class ValidationExecution {
 
     def validateFields(ExecutionEnvironment executionEnvironment, ExecutionContext context, type) {
         type.fields.each { field ->
-            rulesRegistry.getFieldRuleSet().each {
+            rulesRegistry.getFieldRuleSet().each { rule ->
                 if (field instanceof GraphQLFieldDefinition) {
-                    def rule = it.getDeclaredConstructor().newInstance()
                     rule.setContext(context)
                     rule.setExecutionEnvironment(executionEnvironment)
                     if (!executionEnvironment.config['rules'][rule.name()] ?['disable']) {
@@ -67,10 +58,6 @@ class ValidationExecution {
                 }
             }
         }
-    }
-
-    static RulesRegistry loadRegistry() {
-        new RulesRegistry()
     }
 
 }
