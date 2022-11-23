@@ -7,4 +7,5 @@ build/
 ### IntelliJ IDEA ###
 .DS_Store
 .idea
-
+### VSC
+bin
