@@ -46,7 +46,7 @@ rules:
 #### Run from command line:
 
 ```bash
-java -jar graphql-java-linter-1.1-cli.jar linter.yaml
+java -jar graphql-java-linter-1.2-SNAPSHOT-cli.jar linter.yaml
 ```
 
 ### In CI/CD flow via unit tests
@@ -57,7 +57,7 @@ java -jar graphql-java-linter-1.1-cli.jar linter.yaml
 
 ```groovy
 dependencies {
-    test 'org.myhab.tools:graphql-java-linter:1.1'
+    test 'org.myhab.tools:graphql-java-linter:1.2-SNAPSHOT'
 }
 ```
 
@@ -68,7 +68,7 @@ dependencies {
 <dependency>
     <groupId>org.myhab.tools</groupId>
     <artifactId>graphql-java-linter</artifactId>
-    <version>1.1</version>
+    <version>1.2-SNAPSHOT</version>
     <scope>test</scope>
 </dependency>
 ```
