@@ -44,7 +44,7 @@ rules:
 ### Command line
 
 #### Run from command line:
-
+Download from [packages](https://github.com/kirpi4ik/graphql-java-linter/packages/1728805) the latest version.
 ```bash
 java -jar graphql-java-linter-1.2-SNAPSHOT-cli.jar linter.yaml
 ```
