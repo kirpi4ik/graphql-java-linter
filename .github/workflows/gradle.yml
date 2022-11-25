@@ -40,7 +40,7 @@ jobs:
           MVN_CENTRAL_PASSWD: ${{ secrets.MVN_CENTRAL_PASSWD }}
           GTH_USERNAME: ${{ secrets.GTH_USERNAME }}
           GTH_TOKEN: ${{ secrets.GTH_TOKEN }}
-        run: ./gradlew clean build :publishGprPublicationToGitHubPackagesRepository -x signGprPublication
+        run: ./gradlew clean build :publishGprPublicationToGitHubPackagesRepository
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
