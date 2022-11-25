@@ -52,9 +52,6 @@ publishing {
             version = project.version
 
             from project.components.java
-            artifact cliJar {
-                classifier "cli"
-            }
 
             pom {
                 name = project.name
@@ -107,7 +104,11 @@ publishing {
     }
 }
 signing {
-    useGpgCmd()
+    if (System.getenv("GPG_KEY")) {
+        useInMemoryPgpKeys(System.getenv("GPG_KEY"), System.getenv("GPG_PASSWORD"))
+    } else {
+        useGpgCmd()
+    }
     sign publishing.publications.mavenJava
     sign publishing.publications.gpr
 }

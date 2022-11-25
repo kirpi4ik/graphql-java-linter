@@ -5,7 +5,7 @@ name: Build project
 
 on:
   push:
-    branches: [ master ]
+    branches: [ v1.2 ]
 
 env:
   QENV: production
