@@ -105,8 +105,10 @@ publishing {
 }
 signing {
     if (System.getenv("GPG_KEY")) {
+        println "use inmemory"
         useInMemoryPgpKeys(System.getenv("GPG_KEY"), System.getenv("GPG_PASSWORD"))
     } else {
+        println "use gpg"
         useGpgCmd()
     }
     sign publishing.publications.mavenJava
