@@ -37,4 +37,14 @@ abstract class LintRule {
                 executionEnvironment.config.rules[name()] ?['level'] as FailLevel ?: executionEnvironment.config.level,
                 " ${message}")
     }
+
+    @Override
+    boolean equals(Object obj) {
+        return obj instanceof LintRule && obj.name() == this.name()
+    }
+
+    @Override
+    int hashCode() {
+        return name().hashCode()
+    }
 }
