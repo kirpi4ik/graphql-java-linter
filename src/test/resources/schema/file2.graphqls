@@ -1,3 +1,14 @@
 extend type Query {
     Camel:String
+    field(arg:invalidInputName):String
+}
+
+input invalidInputName {
+    id:String
+}
+type invalidTypeName{
+    id:String
+}
+enum invalidEnumName{
+    EN
 }

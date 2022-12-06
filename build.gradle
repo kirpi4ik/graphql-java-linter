@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'org.myhab.tools'
-version '1.1'
+version '1.2'
 
 task cliJar(type: Jar) {
     manifest {
@@ -52,9 +52,6 @@ publishing {
             version = project.version
 
             from project.components.java
-            artifact cliJar {
-                classifier "cli"
-            }
 
             pom {
                 name = project.name
@@ -109,7 +106,6 @@ publishing {
 signing {
     useGpgCmd()
     sign publishing.publications.mavenJava
-    sign publishing.publications.gpr
 }
 test {
     useJUnitPlatform()

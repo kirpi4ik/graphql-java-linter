@@ -14,6 +14,7 @@ class RulesRegistryStatic implements Registry {
         register(ArgumentsHasDescriptions.class)
         register(DeprecationHasReason.class)
         register(EnumValueAllCaps.class)
+        register(TypeNameFirstCaps.class)
     }
 
     def register(Class<?> rule) {
